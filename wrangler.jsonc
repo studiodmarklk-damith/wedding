@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "wedding-invitation",
+  "name": "damith",
   "main": ".open-next/worker.js",
   "compatibility_date": "2025-03-01",
   "compatibility_flags": ["nodejs_compat"],
@@ -15,7 +15,7 @@
     {
       "binding": "DB",
       "database_name": "wedding-db",
-      "database_id": "00000000-0000-0000-0000-000000000000",
+      "database_id": "6ab3adb9-ddc1-42a0-b8cf-72eeafec7a22",
       "migrations_dir": "migrations"
     }
   ],
