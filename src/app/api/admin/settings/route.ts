@@ -9,10 +9,6 @@ export async function PUT(req: NextRequest) {
   if (!(await isAuthed())) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
-export async function PUT(req: NextRequest) {
-  if (!(await isAuthed())) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
   const body = (await req.json().catch(() => ({}))) as Record<string, unknown>;
   try {
     const saved = await saveSettings(body);
@@ -22,5 +18,4 @@ export async function PUT(req: NextRequest) {
     console.error("saveSettings failed:", msg);
     return NextResponse.json({ error: msg }, { status: 500 });
   }
-}
 }
