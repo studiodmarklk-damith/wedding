@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "damith",
+  "name": "wedding",
   "main": ".open-next/worker.js",
   "compatibility_date": "2025-03-01",
   "compatibility_flags": ["nodejs_compat"],
@@ -15,7 +15,7 @@
     {
       "binding": "DB",
       "database_name": "wedding-db",
-      "database_id": "6ab3adb9-ddc1-42a0-b8cf-72eeafec7a22",
+      "database_id": "af2d98ea-0215-410e-aa08-5a26db942f9a",
       "migrations_dir": "migrations"
     }
   ],
