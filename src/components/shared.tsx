@@ -100,7 +100,7 @@ export function Petals() {
 }
 
 /** Small floating "About" button that opens the credit popup. */
-export function AboutButton() {
+export function AboutButton({ settings }: { settings: Settings }) {
   const [open, setOpen] = useState(false);
   useEffect(() => {
     if (!open) return;
@@ -108,6 +108,8 @@ export function AboutButton() {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
+  const tagline = settings.about_tagline.split("\n").map((l) => l.trim()).filter(Boolean);
+  const waDigits = settings.about_whatsapp.replace(/[^\d]/g, "");
   return (
     <>
       <button className="about-btn" onClick={() => setOpen(true)}>
@@ -122,31 +124,33 @@ export function AboutButton() {
             <svg className="ic" viewBox="0 0 24 24" style={{ width: 34, height: 34 }}>
               <use href="#i-heart" />
             </svg>
-            <div className="by">Design By</div>
-            <div className="brand">JGS Lanka Co.</div>
+            <div className="by">{settings.about_by}</div>
+            <div className="brand">{settings.about_brand}</div>
             <svg className="divider" viewBox="0 0 150 30">
               <use href="#lotus" />
             </svg>
             <div style={{ fontSize: 17, lineHeight: 1.6 }}>
-              Beautiful wedding invitations,
-              <br />
-              crafted with love.
+              {tagline.map((line, i) => (
+                <span key={i}>
+                  {line}
+                  {i < tagline.length - 1 && <br />}
+                </span>
+              ))}
             </div>
-            <a
-              className="wa-btn"
-              href="https://wa.me/94702001859"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <svg viewBox="0 0 32 32">
-                <use href="#i-wa" />
-              </svg>
-              WhatsApp · +94 70 200 1859
-            </a>
+            {waDigits && (
+              <a className="wa-btn" href={`https://wa.me/${waDigits}`} target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 32 32">
+                  <use href="#i-wa" />
+                </svg>
+                WhatsApp · +{settings.about_whatsapp}
+              </a>
+            )}
             <br />
-            <a className="web-link" href="https://www.jgslanka.com" target="_blank" rel="noopener noreferrer">
-              www.jgslanka.com
-            </a>
+            {settings.about_web_url && (
+              <a className="web-link" href={settings.about_web_url} target="_blank" rel="noopener noreferrer">
+                {settings.about_web_text}
+              </a>
+            )}
           </div>
         </div>
       )}

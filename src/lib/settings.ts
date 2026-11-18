@@ -7,6 +7,17 @@ export type Settings = {
   poruwa_time: string;
   lunch_time: string;
   reception_time: string;
+  time_title: string; // heading of the Time card
+  poruwa_label: string; // label under the Poruwa time
+  lunch_label: string; // label under the lunch time
+  reception_label: string; // label under the reception time
+  // About card (floating "About" popup)
+  about_by: string;
+  about_brand: string;
+  about_tagline: string; // one line per row
+  about_whatsapp: string; // digits only
+  about_web_url: string;
+  about_web_text: string;
   invitation_message: string;
   venue_name: string;
   venue_address: string;
@@ -34,6 +45,16 @@ export const SETTINGS_KEYS: (keyof Settings)[] = [
   "poruwa_time",
   "lunch_time",
   "reception_time",
+  "time_title",
+  "poruwa_label",
+  "lunch_label",
+  "reception_label",
+  "about_by",
+  "about_brand",
+  "about_tagline",
+  "about_whatsapp",
+  "about_web_url",
+  "about_web_text",
   "invitation_message",
   "venue_name",
   "venue_address",
@@ -80,6 +101,16 @@ export const DEFAULT_SETTINGS: Settings = {
   poruwa_time: "9:12 AM",
   lunch_time: "12:30 PM",
   reception_time: "6:30 PM",
+  time_title: "Time",
+  poruwa_label: "Poruwa Ceremony",
+  lunch_label: "Wedding Lunch",
+  reception_label: "Evening Reception",
+  about_by: "Design By",
+  about_brand: "JGS Lanka Co.",
+  about_tagline: "Beautiful wedding invitations,\ncrafted with love.",
+  about_whatsapp: "94702001859",
+  about_web_url: "https://www.jgslanka.com",
+  about_web_text: "www.jgslanka.com",
   invitation_message:
     "request the honour of your presence as they unite in marriage. Join us in celebrating the beginning of a lifetime of love, laughter and togetherness.",
   venue_name: "Grand Orchid Ballroom",
@@ -162,6 +193,20 @@ function parseTimeline(v: unknown, fallback: TimelineItem[]): TimelineItem[] {
   return items.length ? items : fallback;
 }
 
+/** Keys where an empty string is a valid value (so the admin can clear them). */
+const EMPTY_OK: (keyof Settings)[] = [
+  "time_title",
+  "poruwa_label",
+  "lunch_label",
+  "reception_label",
+  "about_by",
+  "about_brand",
+  "about_tagline",
+  "about_whatsapp",
+  "about_web_url",
+  "about_web_text",
+];
+
 /** Merge a raw key/value map (from D1 or admin input) into a validated Settings object. */
 export function normalizeSettings(map: Record<string, unknown>): Settings {
   const out = { ...DEFAULT_SETTINGS };
@@ -169,6 +214,8 @@ export function normalizeSettings(map: Record<string, unknown>): Settings {
     const raw = map[key];
     if (key === "timeline") out.timeline = parseTimeline(raw, DEFAULT_SETTINGS.timeline);
     else if (ARRAY_KEYS.includes(key)) out[key] = parseArray(raw, DEFAULT_SETTINGS[key] as string[]) as never;
+    else if (EMPTY_OK.includes(key))
+      out[key] = (typeof raw === "string" ? raw : DEFAULT_SETTINGS[key]) as never;
     else out[key] = str(raw, DEFAULT_SETTINGS[key] as string) as never;
   }
   return out;

@@ -309,9 +309,38 @@ export default function AdminPage() {
         <h2>Date &amp; Times</h2>
         <div className="ad-grid">
           {field("wedding_date", "Wedding Date", "date")}
-          {field("poruwa_time", "Poruwa Ceremony Time")}
-          {field("lunch_time", "Wedding Lunch Time")}
-          {field("reception_time", "Evening Reception Time")}
+          {field("time_title", "Time Card Heading")}
+        </div>
+        <div className="ad-grid" style={{ marginTop: 14 }}>
+          {field("poruwa_time", "Poruwa Time")}
+          {field("poruwa_label", "Poruwa Label")}
+          {field("lunch_time", "Lunch Time")}
+          {field("lunch_label", "Lunch Label")}
+          {field("reception_time", "Reception Time")}
+          {field("reception_label", "Reception Label")}
+        </div>
+      </div>
+
+      <div className="ad-card">
+        <h2>About Card</h2>
+        <div className="ad-note" style={{ marginBottom: 12 }}>
+          Text shown in the floating “About” popup on the invitation.
+        </div>
+        <div className="ad-grid">
+          {field("about_by", "Small Top Line (Design By)")}
+          {field("about_brand", "Brand Name")}
+          {field("about_whatsapp", "WhatsApp Number (digits only)")}
+          {field("about_web_url", "Website URL")}
+          {field("about_web_text", "Website Display Text")}
+        </div>
+        <div className="ad-field" style={{ marginTop: 14 }}>
+          <label>Tagline — one line per row</label>
+          <textarea
+            className="wide"
+            value={draft.about_tagline}
+            onChange={(e) => set("about_tagline", e.target.value)}
+            placeholder={"Beautiful wedding invitations,\ncrafted with love."}
+          />
         </div>
       </div>
 

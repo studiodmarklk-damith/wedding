@@ -178,19 +178,19 @@ export default function Invitation({ settings }: { settings: Settings }) {
           <svg className="ic" viewBox="0 0 24 24">
             <use href="#i-clock" />
           </svg>
-          <h2>Time</h2>
+          <h2>{settings.time_title}</h2>
           <div className="time">
             <div>
               <b>{settings.poruwa_time}</b>
-              <span>Poruwa Ceremony</span>
+              <span>{settings.poruwa_label}</span>
             </div>
             <div>
               <b>{settings.lunch_time}</b>
-              <span>Wedding Lunch</span>
+              <span>{settings.lunch_label}</span>
             </div>
             <div>
               <b>{settings.reception_time}</b>
-              <span>Evening Reception</span>
+              <span>{settings.reception_label}</span>
             </div>
           </div>
         </div>
@@ -308,10 +308,10 @@ export default function Invitation({ settings }: { settings: Settings }) {
       )}
 
       <div className="credit">
-        Design By
-        <b>JGS Lanka Co.</b>
-        <a href="https://www.jgslanka.com" target="_blank" rel="noopener noreferrer">
-          www.jgslanka.com
+        {settings.about_by}
+        <b>{settings.about_brand}</b>
+        <a href={settings.about_web_url} target="_blank" rel="noopener noreferrer">
+          {settings.about_web_text}
         </a>
       </div>
 

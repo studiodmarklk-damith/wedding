@@ -68,7 +68,7 @@ export default function Experience({ settings }: { settings: Settings }) {
       <VideoBackground />
       <Particles />
       <Petals />
-      <AboutButton />
+      <AboutButton settings={settings} />
       <SecretButton />
       {phase !== "welcome" && <MuteButton musicRef={musicRef} />}
       {phase === "welcome" && <Welcome settings={settings} onStart={handleStart} fading={welcomeFading} />}
